@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  color-scheme: light;
+
+  /* Base */
+  --color-base-100: oklch(100% 0 0);
+  --color-base-200: oklch(98% 0.012 320);
+  --color-base-300: oklch(94.5% 0.018 320);
+  --color-base-content: oklch(30% 0.03 300);
+
+  /* Brand */
+  --color-primary: oklch(68% 0.19 40);
+  --color-primary-content: oklch(100% 0 0);
+  --color-secondary: oklch(58% 0.21 300);
+  --color-secondary-content: oklch(100% 0 0);
+  --color-accent: oklch(85% 0.16 90);
+  --color-accent-content: oklch(32% 0.06 90);
+
+  /* Neutral */
+  --color-neutral: oklch(28% 0.03 300);
+  --color-neutral-content: oklch(98% 0.005 320);
+
+  /* Feedback */
+  --color-info: oklch(72% 0.15 230);
+  --color-info-content: oklch(98% 0 0);
+  --color-success: oklch(72% 0.17 150);
+  --color-success-content: oklch(98% 0 0);
+  --color-warning: oklch(83% 0.16 80);
+  --color-warning-content: oklch(32% 0.06 80);
+  --color-error: oklch(64% 0.22 28);
+  --color-error-content: oklch(98% 0 0);
+
+  /* Shape */
+  --radius-selector: 1rem;
+  --radius-field: 0.85rem;
+  --radius-box: 1.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fredoka), var(--font-poppins), sans-serif;
+  --font-bangla: var(--font-mayaboti), var(--font-poppins), sans-serif;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+  --animate-blob: blob 14s ease-in-out infinite;
+  --animate-fade-up: fade-up 0.7s ease-out both;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-ticker: ticker 30s linear infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes blob {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(24px, -32px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker,
+  .animate-blob,
+  .animate-float,
+  .animate-float-slow {
+    animation: none;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-primary-content);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(
+    120deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility glass {
+  background-color: color-mix(in oklab, var(--color-base-100) 72%, transparent);
+  backdrop-filter: blur(14px) saturate(160%);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Shared hero band used on Blog, Products, Contact, Login & Register */
+@utility page-hero {
+  border-bottom: 1px solid color-mix(in oklab, var(--color-base-300) 70%, transparent);
+  background:
+    radial-gradient(
+      60% 120% at 15% 0%,
+      color-mix(in oklab, var(--color-primary) 12%, transparent),
+      transparent
+    ),
+    radial-gradient(
+      50% 110% at 85% 0%,
+      color-mix(in oklab, var(--color-secondary) 10%, transparent),
+      transparent
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--color-base-200) 70%, transparent),
+      var(--color-base-100)
+    );
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-base-200);
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in oklab, var(--color-primary) 55%, transparent);
+  border-radius: 999px;
+  border: 2px solid var(--color-base-200);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
